@@ -2,16 +2,18 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/thitiphongD/gin-mongo/configs"
+	"github.com/thitiphongD/gin-mongo/routes"
 )
 
 func main() {
 	router := gin.Default()
 
-	router.GET("/say", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "hi",
-		})
-	})
+	// run database
+	configs.CONNECT_DB()
+
+	//routes
+	routes.UserRoute(router)
 
 	router.Run(":5000")
 }
